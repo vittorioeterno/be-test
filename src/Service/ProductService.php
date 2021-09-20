@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Data\Products;
+use App\Entity\Product;
 use App\Schema\Service;
 use App\Utils\CurlUtils;
 
@@ -33,28 +35,38 @@ class ProductService extends Service {
                 $url .= "?categoryId=".$id;
             }
 
-            $response_curl = CurlUtils::execCompleteGetCurl($url,$this->header,$this->addition_data);
+            ///// cURL 
+            // $response_curl = CurlUtils::execCompleteGetCurl($url,$this->header,$this->addition_data);
 
-            if (!is_null($response_curl)) {
+            // if (!is_null($response_curl)) {
 
-                $message='';
-                $respons_array = json_decode($response_curl["result"], true);
-                if(is_array($respons_array)) { 
+            //     $message='';
+            //     $respons_array = json_decode($response_curl["result"], true);
+            //     if(is_array($respons_array)) { 
 
-                    if (isset($respons_array["message"])) {
-                        $message = $respons_array["message"];
-                    }
+            //         if (isset($respons_array["message"])) {
+            //             $message = $respons_array["message"];
+            //         }
 
-                    if (isset($respons_array["error"])) {
-                        $message = $respons_array["error"];
-                    }
-                }
+            //         if (isset($respons_array["error"])) {
+            //             $message = $respons_array["error"];
+            //         }
+            //     }
 
-                return $respons_array;
+            //     return $respons_array;
 
+            // }
+
+
+            ///// Mocked data
+            $products = Products::getProducts();
+            if (!is_null($id) && array_key_exists($id, $products)) {
+                /** @var Product $product */
+                $product = $products[$id];
+                $products = [$product];
             }
 
-            return null;
+            return $products;
 
         }catch (\Exception $e) {
             throw $e;
