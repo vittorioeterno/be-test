@@ -1,4 +1,5 @@
 # Setup
+Download the project, go to the root foolder and launch the composer install:
 
     git clone https://github.com/vittorioeterno/be-test.git
 
