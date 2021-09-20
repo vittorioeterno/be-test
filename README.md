@@ -1,3 +1,10 @@
+# Setup
+
+    git clone https://github.com/vittorioeterno/be-test.git
+
+    composer install
+
+
 # Install symfony command:
 
     wget https://get.symfony.com/cli/installer -O - | bash
